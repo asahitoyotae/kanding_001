@@ -1,0 +1,150 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+body {
+  --bg-color-light: white;
+  --bg-color-dark: #374151;
+  --text-color-custom-1: white;
+  --sudo-element: #374151;
+
+  color: rgb(--text-custom-color);
+  background-color: var(--bg-custom-color);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.custom-bg-text {
+  background-color: var(--bg);
+  color: var(--text-color);
+}
+
+.custom-pre {
+  font-family: Arial, Helvetica, sans-serif;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  width: 100%;
+  max-width: 100%;
+}
+
+.custom-overflow-x {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+
+.ilabasangbayung {
+  font-size: 1rem;
+  white-space: nowrap;
+  padding: 10px 20px;
+  border-radius: 10px;
+  position: absolute;
+  top: 35px;
+  right: 135px;
+}
+
+.ilabasangbayung::before {
+  content: "";
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid var(--sudo-element);
+  z-index: 1;
+  top: -8px;
+  right: 53px;
+  position: absolute;
+}
+.ilabasangbayung2 {
+  font-size: 1rem;
+  white-space: nowrap;
+  padding: 10px 20px;
+  border-radius: 10px;
+  position: absolute;
+  top: 35px;
+  right: 70px;
+}
+
+.ilabasangbayung2::before {
+  content: "";
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid var(--sudo-element);
+  z-index: 1;
+  top: -8px;
+  right: 58px;
+  position: absolute;
+}
+.ilabasangbayung3 {
+  font-size: 1rem;
+  white-space: nowrap;
+  padding: 10px 20px;
+  border-radius: 10px;
+  position: absolute;
+  top: 40px;
+  right: 40px;
+}
+
+.ilabasangbayung3::before {
+  content: "";
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid var(--sudo-element);
+  z-index: 1;
+  top: -8px;
+  right: 33px;
+  position: absolute;
+}
+.start_of_left {
+  left: 30%;
+}
+
+.gituslok {
+  border: 1px solid rgb(181, 181, 181, 0.3);
+  transition: 500ms ease-in-out;
+}
+.userlabel {
+  border: 1px solid rgb(181, 181, 181, 0.3);
+  transition: 500ms ease-in-out;
+}
+
+.gituslok:focus ~ input:not(.gituslok) {
+  border: 1px solid rgb(0, 110, 253);
+  box-shadow: 0 0 3px 3px rgb(0, 110, 255, 0.4);
+  transition: 500ms ease-in-out;
+}
+.gituslok:focus {
+  border: 1px solid rgb(0, 110, 253);
+  box-shadow: 0 0 3px 3px rgb(0, 110, 255, 0.4);
+  transition: 500ms ease-in-out;
+}
