@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import "./globals.css";
 import Sidebar from "./components/sidebar";
 import OpenRes from "./components/prompter";
@@ -15,7 +14,7 @@ import userInfoStore from "./api/auth/userauthStore";
 
 const Home = () => {
   const router = useRouter();
-  const { user, access_key } = userInfoStore();
+  const { user, tokens } = userInfoStore();
   const [userData, setUserData] = useState({});
   const [gptData, setGptData] = useState({});
   const {
@@ -26,13 +25,12 @@ const Home = () => {
     waiting,
     setWaiting,
     setShowBot,
-    theme,
   } = useStore();
   useEffect(() => {
-    if (!user && !access_key) {
+    if (!user && !tokens) {
       router.push("/login");
     }
-  }, []);
+  });
   const handleUserData = (data) => {
     setShowBot(true);
     setUserData(data);

@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCopy } from "@fortawesome/free-regular-svg-icons";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import chatStore from "./../api/completion/chat/chatStore";
+import Image from "next/image";
 
 const OpenRes = ({ userData, gptData }) => {
   const { chats, setChats } = chatStore();
@@ -132,7 +133,7 @@ const OpenRes = ({ userData, gptData }) => {
                     height: "70px",
                   }}
                 >
-                  <img src="/user.png" alt="user" />
+                  <Image src="/user.png" alt="user" width={70} height={70} />
                 </div>
                 <div className="col-span-9">
                   <pre className="custom-pre">
@@ -157,7 +158,7 @@ const OpenRes = ({ userData, gptData }) => {
                     height: "70px",
                   }}
                 >
-                  <img src="/goat.png" alt="user" />
+                  <Image src="/goat.png" alt="user" width={70} height={70} />
                 </div>
                 <div className="w-full col-span-9">
                   {item.content.split("```").map((text, ind) => {
@@ -231,7 +232,7 @@ const OpenRes = ({ userData, gptData }) => {
               height: "70px",
             }}
           >
-            <img src="/user.png" alt="user" />
+            <Image src="/user.png" alt="user" width={70} height={70} />
           </div>
           <div className="col-span-9">
             <pre className="custom-pre">
@@ -251,7 +252,7 @@ const OpenRes = ({ userData, gptData }) => {
               height: "70px",
             }}
           >
-            <img src="/goat.png" alt="goat" />
+            <Image src="/goat.png" alt="goat" width={70} height={70} />
           </div>
           {!gptData.content ? (
             newMessage

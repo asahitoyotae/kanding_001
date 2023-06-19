@@ -127,4 +127,6 @@ const AskSomething = React.memo(({ handleUserData, handleGptData }) => {
   );
 });
 
+AskSomething.displayName = "AskSomething";
+
 export default AskSomething;
