@@ -4,7 +4,7 @@ const LogoutUser = async (access) => {
   const header = { "auth-token": `Bearer ${access}` };
   const body = {};
 
-  const url = "http://localhost:8000/api/users/logout";
+  const url = "https://kanding-server.onrender.com/api/users/logout";
   try {
     const response = await axios.post(url, body, { headers: header });
     return response.data;

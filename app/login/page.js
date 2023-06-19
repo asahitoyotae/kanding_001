@@ -36,7 +36,6 @@ const LogIn = () => {
     // }
     setLoading(true);
     const iuser = await getAcess(e);
-    console.log("user", iuser);
     if (iuser.success) {
       setUser(iuser);
       setAccessKey(iuser.tokens);

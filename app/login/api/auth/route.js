@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const getAcess = async (e) => {
-  const url = "http://localhost:8000/api/users/login";
+  const url = "https://kanding-server.onrender.com/api/users/login";
   const body = {
     email: e.target.email.value,
     password: e.target.password.value,

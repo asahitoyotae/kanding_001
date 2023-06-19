@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const generateChatResponse = async (prompt, model, chatId, tokens) => {
-  const url = "http://localhost:8000/api/chat/completion";
+  const url = "https://kanding-server.onrender.com/api/chat/completion";
 
   const header = {
     "auth-token": tokens.access,
@@ -32,7 +32,7 @@ export const generateChatResponse = async (prompt, model, chatId, tokens) => {
 };
 
 export const deleteAllChat = async (access) => {
-  const url = "http://localhost:8000/api/chat/delete";
+  const url = "https://kanding-server.onrender.com/api/chat/delete";
   const header = { "auth-token": access };
 
   try {
@@ -45,7 +45,7 @@ export const deleteAllChat = async (access) => {
 };
 
 export const deleteSingleChat = async (access, chat_id) => {
-  const url = "http://localhost:8000/api/chat/single-delete";
+  const url = "https://kanding-server.onrender.com/api/chat/single-delete";
   const header = {
     "auth-token": access,
   };

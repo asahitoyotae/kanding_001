@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const createNewUser = async (e) => {
-  const url = "http://localhost:8000/api/users/create";
+  const url = "https://kanding-server.onrender.com/api/users/create";
   const header = {
     "auth-key": e.target.access_key.value,
   };
@@ -17,6 +17,7 @@ export const createNewUser = async (e) => {
 
     return data;
   } catch (error) {
+    console.log(error);
     return error.response ? error.response.data : error.message;
   }
 };

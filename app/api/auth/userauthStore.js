@@ -13,30 +13,28 @@ const userInfoStore = create((set, get) => ({
   getNewAccessKey: () => {
     const oldtokens = { ...get().tokens };
     const getTime = 4500 * 60;
-    const url = "http://localhost:8000/api/users/newaccess";
-    setTimeout(() => {
-      const interval = setInterval(async () => {
-        const getKey = async () => {
-          try {
-            const res = await axios.post(
-              url,
-              {},
-              { headers: { "auth-refresh": oldtokens.refresh } }
-            );
-            const data = res.data;
-            oldtokens.access = data.access;
-            console.log("new access key", get().tokens);
-            set({ tokens: oldtokens });
-          } catch (error) {
-            console.log("error getting access key", error);
-            setTimeout(() => {
-              console.log("error getting new key trying again");
-              getKey();
-            }, 3000);
-          }
-        };
-        getKey();
-      }, getTime);
+    const url = "https://kanding-server.onrender.com/api/users/newaccess";
+    const interval = setInterval(async () => {
+      const getKey = async () => {
+        try {
+          const res = await axios.post(
+            url,
+            {},
+            { headers: { "auth-refresh": oldtokens.refresh } }
+          );
+          const data = res.data;
+          oldtokens.access = data.access;
+          console.log("new access key", get().tokens);
+          set({ tokens: oldtokens });
+        } catch (error) {
+          console.log("error getting access key", error);
+          setTimeout(() => {
+            console.log("error getting new key trying again");
+            getKey();
+          }, 3000);
+        }
+      };
+      getKey();
     }, getTime);
   },
 }));

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const validateEmail = async (token) => {
-  const url = "http://localhost:8000/api/users/validate";
+  const url = "https://kanding-server.onrender.com/api/users/validate";
   const header = {
     "auth-token": token,
   };
