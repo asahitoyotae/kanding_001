@@ -68,7 +68,7 @@ const AskSomething = React.memo(({ handleUserData, handleGptData }) => {
     handleUserData({
       title: title || null,
       role: "user",
-      content: searchInput,
+      content: searchInput.trim(),
     });
     setSearchInput("");
     setWaiting(true);
