@@ -1,13 +1,7 @@
 import { create } from "zustand";
 import axios from "axios";
-
-let datalogic = null;
-//localStorage.clear();
-if (localStorage.getItem("dataSavefromKanding")) {
-  datalogic = JSON.parse(localStorage.getItem("dataSavefromKanding"));
-}
 const useStore = create((set, get) => ({
-  data: datalogic || [],
+  data: [],
   title: null,
   engine: "gpt-3.5-turbo",
   waiting: false,
