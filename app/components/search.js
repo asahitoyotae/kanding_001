@@ -20,7 +20,10 @@ const AskSomething = React.memo(({ handleUserData, handleGptData }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (e.target.search.value === "" || e.target.search.value.length < 1) {
+    if (
+      e.target.search.value === "" ||
+      e.target.search.value.trim().length < 1
+    ) {
       return;
     }
     if (!user && !tokens.access) {
