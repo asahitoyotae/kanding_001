@@ -142,7 +142,7 @@ const Home = () => {
           <div>
             <p
               //onClick={callFornineoneone}
-              className="border rounded-xl  px-6 py-3 w-full my-2  border bg-white"
+              className="border rounded-xl  px-6 py-3 w-full my-2 border bg-white"
             >
               unsay may na una, ang manok or ang itlog?
             </p>
