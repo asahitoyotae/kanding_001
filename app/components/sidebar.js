@@ -19,7 +19,7 @@ const Sidebar = () => {
   const [toDelete, settoDelete] = useState(null);
 
   const handleDeleteThreads = async () => {
-    if (waiting) {
+    if (waiting || chats.length === 0) {
       return;
     }
     setLoading(true);

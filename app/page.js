@@ -141,23 +141,23 @@ const Home = () => {
         <div className="grid grid-cols-2 gap-20 w-full text-center">
           <div>
             <p
-              onClick={callFornineoneone}
-              className="border rounded-xl  px-6 py-3 w-full my-2 cursor-pointer border bg-white"
+              //onClick={callFornineoneone}
+              className="border rounded-xl  px-6 py-3 w-full my-2  border bg-white"
             >
               unsay may na una, ang manok or ang itlog?
             </p>
             <p
-              onClick={callFornineoneone}
-              className="border rounded-xl  px-6 py-3 w-full my-2 cursor-pointer border bg-white"
+              //onClick={callFornineoneone}
+              className="border rounded-xl  px-6 py-3 w-full my-2  border bg-white"
             >
               pilay kanding sa bukid? gi hiktan oh gi buhian?
             </p>
           </div>
           <div>
-            <div className="border rounded-xl  px-6 py-3 w-full my-2 cursor-pointer border bg-white">
+            <div className="border rounded-xl  px-6 py-3 w-full my-2 border bg-white">
               dili makablo mo timpla og kape.
             </div>
-            <div className="border rounded-xl  px-6 py-3 w-full my-2 cursor-pointer border bg-white">
+            <div className="border rounded-xl  px-6 py-3 w-full my-2 border bg-white">
               kung walay internet walay ayo.
             </div>
           </div>
