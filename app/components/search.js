@@ -39,14 +39,11 @@ const AskSomething = React.memo(({ handleUserData, handleGptData }) => {
     if (title === null) {
       messagesArray.push({ role: "user", content: searchInput });
     } else {
-      for (let i = 0; i < chats.length; i++) {
-        if (chats[i].chat_id === title) {
-          dummy = chats[i].conv;
-        }
-      }
-      for (let j = dummy.length - 1; j >= 0; j--) {
+      let thisChat = chats.find((chat) => chat.chat_id === title);
+      for (let i = thisChat.conv.length - 1; i >= 0; i--) {
         if (messagesArray.length < 9) {
-          messagesArray.unshift(dummy[j]);
+          delete thisChat.conv[i]._id;
+          messagesArray.unshift(thisChat.conv[i]);
         }
       }
       messagesArray.push({ role: "user", content: searchInput });

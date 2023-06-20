@@ -11,7 +11,7 @@ import "./custom_navbar.css";
 
 const Sidebar = () => {
   const { chats, setChats } = chatStore();
-  const { updateTitle, title } = useStore();
+  const { updateTitle, title, waiting } = useStore();
   const { tokens } = userInfoStore();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState();
@@ -19,6 +19,9 @@ const Sidebar = () => {
   const [toDelete, settoDelete] = useState(null);
 
   const handleDeleteThreads = async () => {
+    if (waiting) {
+      return;
+    }
     setLoading(true);
     const res = await deleteAllChat(tokens.access);
     if (res.success) {
@@ -36,6 +39,9 @@ const Sidebar = () => {
   };
 
   const handleSingleDelete = async (selected) => {
+    if (waiting && selected === title) {
+      return;
+    }
     setSingleLoading(true);
     settoDelete(selected);
     const del = await deleteSingleChat(tokens.access, selected);
@@ -60,7 +66,12 @@ const Sidebar = () => {
     <div className="mt-20 pb-24 w-1/6 px-4 flex flex-col text-sm fixed top-0 left-0 h-full">
       <h1 className="mb-9 text-center text-2xl font-bold">Kanding</h1>
       <button
-        onClick={() => updateTitle(null)}
+        onClick={() => {
+          if (waiting) {
+            return;
+          }
+          updateTitle(null);
+        }}
         className=" duration-500 ease-in-out hover:duration-500 ease-in-out mb-8 mt-2 rounded-md w-full py-5 border text-left pl-9 hover:bg-green-200"
       >
         <FontAwesomeIcon icon={faMessage} />
@@ -90,7 +101,12 @@ const Sidebar = () => {
             return (
               <div
                 key={e.chat_id}
-                onClick={() => updateTitle(e.chat_id)}
+                onClick={() => {
+                  if (waiting) {
+                    return;
+                  }
+                  updateTitle(e.chat_id);
+                }}
                 className="chat_choice duration-500 ease-in-out my-1 rounded-md w-full py-5 border text-left pl-3 cursor-pointer hover:bg-gray-200 hover:duration-500 ease-in-out"
               >
                 {singleLoading && toDelete === e.chat_id ? (

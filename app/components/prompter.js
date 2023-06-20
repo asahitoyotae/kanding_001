@@ -4,7 +4,7 @@ import useStore from "../api/alldata";
 import Typewriter from "typewriter-effect";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCopy } from "@fortawesome/free-regular-svg-icons";
-import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faStop } from "@fortawesome/free-solid-svg-icons";
 import chatStore from "./../api/completion/chat/chatStore";
 import Image from "next/image";
 
@@ -14,6 +14,7 @@ const OpenRes = ({ userData, gptData }) => {
     updateTitle,
     title,
     setWaiting,
+    waiting,
     animateThinking,
     setAnimateThinking,
     showBot,
@@ -39,7 +40,17 @@ const OpenRes = ({ userData, gptData }) => {
             let innerText = "";
             innerArray.forEach((element, i) => {
               if (i % 2 === 0) {
-                innerText += `${element}`;
+                let newElement = element.split("**");
+                let newText = "";
+                newElement.forEach((t, r) => {
+                  if (r % 2 === 0) {
+                    newText += t;
+                  } else {
+                    newText += `<span class='text-white py-1 px-2 rounded-lg mx-1 bg-teal-700'>${t}</span>`;
+                  }
+                });
+
+                innerText += `${newText}`;
               } else {
                 innerText += `<span class='text-white py-1 px-2 rounded-lg mx-1 bg-gray-700'>${element}</span>`;
               }
@@ -79,7 +90,7 @@ const OpenRes = ({ userData, gptData }) => {
   const [currentChat, setCurrentChat] = useState([]);
   const [newTitle, setnewTitle] = useState(false);
   useEffect(() => {
-    if (newTitle) return setnewTitle(false);
+    //if (newTitle) return setnewTitle(false);
     if (title) {
       chats.map((e, index) => {
         if (chats[index].chat_id === title) {
@@ -99,9 +110,9 @@ const OpenRes = ({ userData, gptData }) => {
     };
     setTimeout(() => {
       scrollToBottom();
-      setnewTitle(false);
-    }, 0);
-  }, [userData.content, currentChat, title]);
+      //setnewTitle(false);
+    }, 7);
+  }, [userData.content, currentChat]);
 
   const [copyAccess, setCopyAccess] = useState();
   const [copied, setcopied] = useState(false);
@@ -115,6 +126,45 @@ const OpenRes = ({ userData, gptData }) => {
       .catch(() => {
         setcopied(true);
       });
+  };
+  const stopAnimate = () => {
+    if (!waiting) {
+      return;
+    } else {
+      const isNew = !title ? true : false;
+      setChats(
+        [
+          { role: userData.role, content: userData.content },
+          { ...gptData.data.res },
+        ],
+        isNew,
+        {
+          chat_id: gptData.data.chat_id,
+          title: gptData.data.title,
+        },
+        false
+      );
+
+      setWaiting(false);
+      if (!title) {
+        setnewTitle(true);
+        updateTitle(gptData.data.chat_id);
+        // chats.map((e, index) => {
+        //   if (e.chat_id === gptData.data.chat_id) {
+        //     setCurrentChat(chats[index].conv);
+        //   }
+        // });
+        setTimeout(() => {
+          setDone(false);
+          setShowBot(false);
+          setnewMessage("");
+        }, 0);
+      } else {
+        setDone(false);
+        setShowBot(false);
+        setnewMessage("");
+      }
+    }
   };
 
   return (
@@ -169,7 +219,20 @@ const OpenRes = ({ userData, gptData }) => {
                           <p className=" leading-7 ">
                             {text.split("`").map((item, i) => {
                               if (i % 2 === 0) {
-                                return item;
+                                return item.split("**").map((texts, indux) => {
+                                  if (indux % 2 === 0) {
+                                    return texts;
+                                  } else {
+                                    return (
+                                      <span
+                                        key={`k${i}-${indux}-`}
+                                        className=" text-white py-1 px-2 rounded-lg mx-1 bg-teal-700"
+                                      >
+                                        {texts}
+                                      </span>
+                                    );
+                                  }
+                                });
                               } else {
                                 return (
                                   <span
@@ -267,7 +330,7 @@ const OpenRes = ({ userData, gptData }) => {
                       document.querySelector(".Typewriter__cursor").remove();
                     })
                     .typeString(content)
-                    .callFunction(async () => {
+                    .callFunction(() => {
                       const isNew = !title ? true : false;
                       setChats(
                         [
@@ -284,14 +347,14 @@ const OpenRes = ({ userData, gptData }) => {
 
                       setWaiting(false);
                       if (!title) {
-                        setnewTitle(true);
+                        //setnewTitle(true);
 
                         updateTitle(gptData.data.chat_id);
-                        chats.map((e, index) => {
-                          if (e.chat_id === gptData.data.chat_id) {
-                            setCurrentChat(chats[index].conv);
-                          }
-                        });
+                        // chats.map((e, index) => {
+                        //   if (e.chat_id === gptData.data.chat_id) {
+                        //     setCurrentChat(chats[index].conv);
+                        //   }
+                        // });
                         setTimeout(() => {
                           setDone(false);
                           setShowBot(false);
@@ -308,6 +371,15 @@ const OpenRes = ({ userData, gptData }) => {
               />
             </div>
           )}
+        </div>
+      )}
+      {waiting && gptData.content && (
+        <div onClick={stopAnimate} className="stop_button">
+          <FontAwesomeIcon
+            icon={faStop}
+            style={{ width: "20px", height: "20px" }}
+          />
+          <span>stop typing</span>
         </div>
       )}
       <div className="mt-10" ref={messagesEndRef}></div>

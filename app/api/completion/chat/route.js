@@ -11,11 +11,13 @@ export const generateChatResponse = async (prompt, model, chatId, tokens) => {
     messages: prompt,
     chatId: chatId,
   };
+  console.log(prompt);
   try {
     const response = await axios.post(url, body, { headers: header });
     const data = response.data;
     return data;
   } catch (error) {
+    console.log(error);
     return {
       res: {
         role: "assistant",

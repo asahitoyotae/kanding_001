@@ -276,3 +276,18 @@
     transform: rotate(360deg);
   }
 }
+.stop_button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  position: fixed;
+  bottom: 104px;
+  left: 50%;
+  padding: 5px 10px;
+  background-color: rgb(243, 243, 243);
+  color: rgb(56, 56, 56);
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
